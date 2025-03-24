@@ -1,0 +1,104 @@
+﻿@page
+@model RazorPages_API_Client.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+
+<!-- Main Container -->
+<div class="container mt-5">
+
+    <!-- Title Section -->
+    <h1 class="text-center mb-4">Search eBay by Criteria</h1>
+
+    <!-- Search Filter Section -->
+    <div class="filter-section">
+        <form id="searchForm" action="" method="GET">
+            <div class="row">
+                <!-- Marketplace Filter -->
+                <div class="col-md-4">
+                    <div class="filterCriteriaContainer" id="market-place-container">
+                        <label for="market-place">Marketplace</label>
+                        <select title="Disabled for demo purposes" name="Marketplace" id="market-place" class="form-control demo-disabled" disabled>
+                            <option value="AU">AU</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Category Filter -->
+                <div class="col-md-4">
+                    <div class="filterCriteriaContainer" id="category-container">
+                        <label for="category">Category</label>
+                        <select name="Category" id="category" class="form-control">
+                            <option value="Computers">Computers/Tablets & Networking</option>
+                            <option value="Books">Books</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Subcategory Filter -->
+                <div class="col-md-4">
+                    <div class="filterCriteriaContainer" id="subcategory-container">
+                        <label for="subcategory">Subcategory</label>
+                        <select name="Subcategory" id="subcategory" class="form-control">
+                            @foreach(var subcat in Model.SubCategories)
+                            {
+                                <option value="@subcat">@subcat</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search Button -->
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Product Results Section -->
+    <div id="resultContainer" class="mt-5">
+        <h3 class="text-center">Search Results</h3>
+        <p class="text-center">Here will be the search results based on the selected filters.</p>
+
+        <!-- Example Product Cards (replace with dynamic data) -->
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="IMAGE_FILL_HERE" class="card-img-top" alt="IMAGEALT_FILL_HERE">
+                    <div class="card-body">
+                        <h5 class="card-title">PRODUCTNAME_FILL_HERE</h5>
+                        <p class="card-text">PRODUCTPRICE_FILL_HERE</p>
+                        <a href="PRODUCTLINK_FILL_HERE" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="IMAGE_FILL_HERE" class="card-img-top" alt="IMAGEALT_FILL_HERE">
+                    <div class="card-body">
+                        <h5 class="card-title">PRODUCTNAME_FILL_HERE</h5>
+                        <p class="card-text">PRODUCTPRICE_FILL_HERE</p>
+                        <a href="PRODUCTLINK_FILL_HERE" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="IMAGE_FILL_HERE" class="card-img-top" alt="IMAGEALT_FILL_HERE">
+                    <div class="card-body">
+                        <h5 class="card-title">PRODUCTNAME_FILL_HERE</h5>
+                        <p class="card-text">PRODUCTPRICE_FILL_HERE</p>
+                        <a href="PRODUCTLINK_FILL_HERE" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="~/css/style.css">
