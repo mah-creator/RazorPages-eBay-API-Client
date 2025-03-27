@@ -1,7 +1,15 @@
+using Microsoft.Net.Http.Headers;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddHttpClient<EbayClient>((client) => 
+{
+    client.BaseAddress = new Uri(builder.Configuration.GetSection("BaseAddress").Value);
+    client.DefaultRequestHeaders.Add(HeaderNames.Authorization, builder.Configuration.GetSection("ApiKey").Value);
+}
+);
 
 var app = builder.Build();
 

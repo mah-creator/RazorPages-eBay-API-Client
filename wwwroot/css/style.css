@@ -41,7 +41,7 @@
     text-decoration: underline;
 }
 
-#portofolio-card {
+#portfolio-card {
     pointer-events: none;  /* Disables clicking */
     opacity: 0.5;           /* Optional: Makes it look "disabled" */
 }
