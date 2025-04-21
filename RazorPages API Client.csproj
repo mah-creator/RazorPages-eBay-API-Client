@@ -7,4 +7,9 @@
     <RootNamespace>RazorPages_API_Client</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="eBay" Version="3.1131.0" />
+    <PackageReference Include="eBay.OAuth.Client" Version="2.0.3" />
+  </ItemGroup>
+
 </Project>

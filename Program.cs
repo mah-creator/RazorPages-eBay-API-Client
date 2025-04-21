@@ -1,15 +1,18 @@
+using System.Net.Http.Headers;
+using eBay.ApiClient.Auth.OAuth2;
 using Microsoft.Net.Http.Headers;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddHttpClient<EbayClient>((client) => 
+// builder.Services.AddHttpClient<EbayClient>(client => {});
+builder.Services.AddHttpClient<EbayClient>( client =>
 {
-    client.BaseAddress = new Uri(builder.Configuration.GetSection("BaseAddress").Value);
-    client.DefaultRequestHeaders.Add(HeaderNames.Authorization, builder.Configuration.GetSection("ApiKey").Value);
-}
-);
+    client.DefaultRequestHeaders.Add(HeaderNames.Authorization, builder.Configuration.GetSection("AuthHeader").Value);
+    client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json");
+    client.DefaultRequestHeaders.Add(HeaderNames.AcceptEncoding, "gzip");
+});
 
 var app = builder.Build();
 

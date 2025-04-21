@@ -30,9 +30,7 @@
                 <div class="col-md-4">
                     <div class="filterCriteriaContainer" id="category-container">
                         <label for="category">Category</label>
-                        <select name="Category" id="category" class="form-control">
-                            <option value="Computers">Computers/Tablets & Networking</option>
-                            <option value="Books">Books</option>
+                        <select name="Category" id="category" class="form-control" asp-items="Model.MainSelectList" onchange="onCategoryChange()">
                         </select>
                     </div>
                 </div>
@@ -42,10 +40,6 @@
                     <div class="filterCriteriaContainer" id="subcategory-container">
                         <label for="subcategory">Subcategory</label>
                         <select name="Subcategory" id="subcategory" class="form-control">
-                            @foreach(var subcat in Model.SubCategories)
-                            {
-                                <option value="@subcat">@subcat</option>
-                            }
                         </select>
                     </div>
                 </div>
@@ -102,3 +96,26 @@
 </div>
 
 <link rel="stylesheet" href="~/css/style.css">
+
+<script>
+    function onCategoryChange() {
+        var categoryId = document.getElementById("category").value;
+
+        fetch(`/CategoryChoice?categoryId=${categoryId}`, {method: 'GET'})
+            .then(response => response.json())
+            .then(data => {
+                // Clear the current options in the subcategory dropdown
+                var subcategoryDropdown = document.getElementById("subcategory");
+                subcategoryDropdown.innerHTML = '<option value="">Select a Subcategory</option>';
+
+                // Populate the subcategory dropdown with the returned data
+                data.forEach(function(subcategory) {
+                    var option = document.createElement("option");
+                    option.value = subcategory.id;
+                    option.textContent = subcategory.name;
+                    subcategoryDropdown.appendChild(option);
+                });
+            })
+            .catch(error => console.error("Error:", error));
+    }
+</script>
